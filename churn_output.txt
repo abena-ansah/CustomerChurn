@@ -1,0 +1,145 @@
+
+=== Data Info ===
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7043 entries, 0 to 7042
+Data columns (total 21 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   customerID        7043 non-null   object 
+ 1   gender            7043 non-null   object 
+ 2   SeniorCitizen     7043 non-null   int64  
+ 3   Partner           7043 non-null   object 
+ 4   Dependents        7043 non-null   object 
+ 5   tenure            7043 non-null   int64  
+ 6   PhoneService      7043 non-null   object 
+ 7   MultipleLines     7043 non-null   object 
+ 8   InternetService   7043 non-null   object 
+ 9   OnlineSecurity    7043 non-null   object 
+ 10  OnlineBackup      7043 non-null   object 
+ 11  DeviceProtection  7043 non-null   object 
+ 12  TechSupport       7043 non-null   object 
+ 13  StreamingTV       7043 non-null   object 
+ 14  StreamingMovies   7043 non-null   object 
+ 15  Contract          7043 non-null   object 
+ 16  PaperlessBilling  7043 non-null   object 
+ 17  PaymentMethod     7043 non-null   object 
+ 18  MonthlyCharges    7043 non-null   float64
+ 19  TotalCharges      7043 non-null   object 
+ 20  Churn             7043 non-null   object 
+dtypes: float64(1), int64(2), object(18)
+memory usage: 1.1+ MB
+None
+
+=== Data Head ===
+   customerID  gender  SeniorCitizen  ... MonthlyCharges TotalCharges  Churn
+0  7590-VHVEG  Female              0  ...          29.85        29.85     No
+1  5575-GNVDE    Male              0  ...          56.95       1889.5     No
+2  3668-QPYBK    Male              0  ...          53.85       108.15    Yes
+3  7795-CFOCW    Male              0  ...          42.30      1840.75     No
+4  9237-HQITU  Female              0  ...          70.70       151.65    Yes
+
+[5 rows x 21 columns]
+
+=== Churn Proportions By Group ===
+TenureGroup  Churn
+0-12m        No       0.523218
+             Yes      0.476782
+12-24m       No       0.712891
+             Yes      0.287109
+24-48m       No       0.796110
+             Yes      0.203890
+48-72m       No       0.904868
+             Yes      0.095132
+Name: proportion, dtype: float64
+Contract        Churn
+Month-to-month  No       0.572903
+                Yes      0.427097
+One year        No       0.887305
+                Yes      0.112695
+Two year        No       0.971681
+                Yes      0.028319
+Name: proportion, dtype: float64
+PaymentMethod              Churn
+Bank transfer (automatic)  No       0.832902
+                           Yes      0.167098
+Credit card (automatic)    No       0.847569
+                           Yes      0.152431
+Electronic check           No       0.547146
+                           Yes      0.452854
+Mailed check               No       0.808933
+                           Yes      0.191067
+Name: proportion, dtype: float64
+OnlineSecurity       Churn
+No                   No       0.582333
+                     Yes      0.417667
+No internet service  No       0.925950
+                     Yes      0.074050
+Yes                  No       0.853888
+                     Yes      0.146112
+Name: proportion, dtype: float64
+TechSupport          Churn
+No                   No       0.583645
+                     Yes      0.416355
+No internet service  No       0.925950
+                     Yes      0.074050
+Yes                  No       0.848337
+                     Yes      0.151663
+Name: proportion, dtype: float64
+
+=== Logistic Regression Confusion Matrix ===
+[[940  96]
+ [169 204]]
+
+=== Logistic Regression Classification Report ===
+              precision    recall  f1-score   support
+
+       False       0.85      0.91      0.88      1036
+        True       0.68      0.55      0.61       373
+
+    accuracy                           0.81      1409
+   macro avg       0.76      0.73      0.74      1409
+weighted avg       0.80      0.81      0.80      1409
+
+
+Top Logistic Regression Coefficients:
+Contract_Two year             -1.488850
+InternetService_Fiber optic    0.828460
+TenureGroup_48-72m             0.757040
+Contract_One year             -0.662242
+TenureGroup_12-24m            -0.404664
+OnlineSecurity_Yes            -0.394775
+PhoneService_Yes              -0.374423
+PaperlessBilling_Yes           0.342127
+TechSupport_Yes               -0.324451
+StreamingMovies_Yes            0.318780
+dtype: float64
+
+=== Random Forest Confusion Matrix ===
+[[943  93]
+ [205 168]]
+
+=== Random Forest Classification Report ===
+              precision    recall  f1-score   support
+
+       False       0.82      0.91      0.86      1036
+        True       0.64      0.45      0.53       373
+
+    accuracy                           0.79      1409
+   macro avg       0.73      0.68      0.70      1409
+weighted avg       0.77      0.79      0.78      1409
+
+
+Top Random Forest Features:
+MonthlyCharges                    0.214433
+tenure                            0.208805
+InternetService_Fiber optic       0.041024
+PaymentMethod_Electronic check    0.037218
+gender_Male                       0.034257
+OnlineSecurity_Yes                0.031149
+PaperlessBilling_Yes              0.029677
+Partner_Yes                       0.029004
+Contract_Two year                 0.028048
+TechSupport_Yes                   0.027142
+dtype: float64
+
+
